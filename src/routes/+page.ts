@@ -5,7 +5,7 @@ export const load: PageLoad = async ({fetch}) => {
         const apiKey = import.meta.env.VITE_MY_STRAPI_API_KEY;
         const currentPathname = window.location.pathname;
         const response = await fetch(
-           " http://localhost:1337/api/content-pages/1",
+           " http://localhost:1337/api/home?populate=image.image",
             // Update the endpoint based on your content type
             {
                 headers: {
@@ -17,8 +17,8 @@ export const load: PageLoad = async ({fetch}) => {
         if(!response.ok){
             throw new Error(`HTTP error: ${response.status}`)
         }
-        const pages = await response.json();
-        return {pages}
+        const page = await response.json();
+        return {page}
     } catch (error){
         console.error(error);
         return {error: "Unable to fetch pages"};
