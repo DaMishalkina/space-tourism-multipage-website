@@ -31,7 +31,7 @@
 
 <main class="main">
     {#if bgImages}
-        <picture class="action-section__picture">
+        <picture class="main__picture">
                 <source
                     srcset={bgImages.desktop}
                     media="(min-width: 1200px)"
@@ -41,14 +41,14 @@
                     media="(min-width: 768px)"
                 />
                 <img
-                    class="action-section__image"
+                    class="main__image"
                     src={bgImages.mobile}
                     alt="Background with Earth"
                 />
             </picture>
 
     {/if}
-    <section class="content-section">
+    <section class="main__content-section">
         <p>{data?.page?.data?.attributes?.tagline}</p>
         <h1>{data?.page?.data?.attributes?.title}</h1>
         <div>
@@ -58,8 +58,33 @@
 </main>
 
 <style>
-    .content-section {
+    :global(body){
+        font-family: "Barlow Condensed", sans-serif;
+        margin: 0;
+        max-height: fit-content;
+    }
+
+    .main__content-section {
         display: flex;
         flex-direction: column;
+        color: #fff;
     }
+    .main {
+        position: relative;
+        height: 100dvh;
+        max-height: 100dvh;
+    }
+    .main__picture {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .main__image {
+        width: 100%;
+        height: 100%;
+    }
+
 </style>

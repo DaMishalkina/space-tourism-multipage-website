@@ -6,7 +6,7 @@ export const load: PageLoad = async ({fetch}) => {
         const apiKey = import.meta.env.VITE_MY_STRAPI_API_KEY;
         const strapiURL = import.meta.env.VITE_STRAPI_URL
         const response = await fetch(
-           `${strapiURL}/api/content-pages?filters[slug]=${currentPathname.replace("/", "")}`,
+           `${strapiURL}/api/content-pages?filters[slug]=${currentPathname.replace("/", "")}&populate[Content][populate]=*`,
             // Update the endpoint based on your content type
             {
                 headers: {
@@ -18,8 +18,8 @@ export const load: PageLoad = async ({fetch}) => {
         if(!response.ok){
             throw new Error(`HTTP error: ${response.status}`)
         }
-        const pages = await response.json();
-        return {pages}
+        const page = await response.json();
+        return {page}
     } catch (error){
         console.error(error);
         return {error: "Unable to fetch pages"};

@@ -3,4 +3,12 @@
     console.log(data)
 </script>
 
-<h1>home</h1>
+<main>
+    <h1>{data?.page?.data[0]?.attributes?.title}</h1>
+</main>
+
+<style>
+    :global(body){
+        font-family: "Barlow Condensed", sans-serif;
+    }
+</style>
