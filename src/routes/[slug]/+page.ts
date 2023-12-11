@@ -4,8 +4,9 @@ export const load: PageLoad = async ({fetch}) => {
     try {
         const currentPathname = window.location.pathname;
         const apiKey = import.meta.env.VITE_MY_STRAPI_API_KEY;
+        const strapiURL = import.meta.env.VITE_STRAPI_URL
         const response = await fetch(
-           `http://localhost:1337/api/content-pages?filters[slug]=${currentPathname.replace("/", "")}`,
+           `${strapiURL}/api/content-pages?filters[slug]=${currentPathname.replace("/", "")}`,
             // Update the endpoint based on your content type
             {
                 headers: {
