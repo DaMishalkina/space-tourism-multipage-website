@@ -2,6 +2,9 @@
     import {marked} from "marked";
     import {onMount} from "svelte";
     import ExploreButton from "$lib/components/ExploreButton.svelte";
+    import NavigationBar from "$lib/components/Naviagation/NavigationBar.svelte";
+    import NavigationList from "$lib/components/Naviagation/NavigationList.svelte";
+    import Header from "$lib/components/Header.svelte";
 
     export let data;
     const strapiURL = import.meta.env.VITE_STRAPI_URL
@@ -27,6 +30,8 @@
         }))
     });
 
+    const navigationLinks = ["home", "destination", "crew", "technology"];
+
 
 </script>
 
@@ -50,6 +55,11 @@
 
     {/if}
     <section class="main__content-section">
+        <Header>
+            <NavigationBar>
+                <NavigationList navItems={navigationLinks} />
+            </NavigationBar>
+        </Header>
         <h5>{data?.page?.data?.attributes?.tagline}</h5>
         <h1>{data?.page?.data?.attributes?.title}</h1>
         <div>
@@ -100,6 +110,17 @@
     }
     :global(button){
         cursor: pointer;
+    }
+    :global(a){
+        text-decoration: none;
+        padding: 0;
+        margin: 0;
+        color: var(--title-color);
+    }
+    :global(ul){
+        padding: 0;
+        margin: 0;
+        list-style: none;
     }
 
     .main__content-section {
