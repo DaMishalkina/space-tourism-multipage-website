@@ -1,8 +1,9 @@
 <script lang="ts">
     import {clickOutside} from "$lib/utils/clickOutside";
-    import CloseIcon from "$lib/assets/shared/icon-close.svg";
-    import HamburgerIcon from "$lib/assets/shared/icon-hamburger.svg";
+    import CloseIcon from "$lib/components/svgs/CloseIcon.svelte";
+    import HamburgerIcon from "$lib/components/svgs/HamburgerIcon.svelte";
     import Logo from "$lib/assets/shared/logo.svg";
+
     let isMenuOpened = false;
     const toggle = () => {
         isMenuOpened = !isMenuOpened;
@@ -22,11 +23,7 @@
                class="header-toggle header__toggle"
                class:header-toggle--hidden={isMenuOpened}
        >
-           <img
-                   src={HamburgerIcon}
-                   alt="Hamburger Icon"
-                   class="header__hamburger-icon"
-           />
+           <HamburgerIcon />
            <input
                    class="header-toggle__input"
                    on:change|preventDefault={toggle}
@@ -38,6 +35,9 @@
                 class="header-menu__dropdown-container"
                 class:shown={isMenuOpened}
         >
+            <button on:click={() => isMenuOpened = false}>
+                <CloseIcon />
+            </button>
             <slot />
         </div>
 
@@ -60,11 +60,18 @@
         width: 40px;
         height: 40px;
     }
+    .header-menu {
+        display: flex;
+    }
     .header-toggle {
         position: relative;
         display: flex;
         align-items: center;
         cursor: pointer;
+        color: var(--text-color);
+    }
+    .header-toggle:hover {
+        opacity: 70%;
     }
     .header-toggle--hidden {
         display: none;
@@ -77,6 +84,8 @@
     }
     .header-menu__dropdown-container {
         display: none;
+        flex-direction: column;
+        padding: 34px 27px 34px 32px;
     }
     .header-menu__dropdown-container.shown {
         display: flex;
@@ -88,6 +97,7 @@
         background-color: rgba(255, 255, 255, .15);
         backdrop-filter: blur(10px);
         height: 100dvh;
+        max-height: 100vh;
         width: 68%;
     }
 
