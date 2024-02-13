@@ -50,7 +50,7 @@
 
     {/if}
     <section class="main__content-section">
-        <p>{data?.page?.data?.attributes?.tagline}</p>
+        <h5>{data?.page?.data?.attributes?.tagline}</h5>
         <h1>{data?.page?.data?.attributes?.title}</h1>
         <div>
             {@html content}
@@ -68,6 +68,35 @@
 
     :global(h1, h2, h3, h4, h5){
         font-family: "Bellefair", serif;
+        font-weight: 400;
+        font-style: normal;
+        padding: 0;
+        margin: 0;
+        color: var(--title-color);
+        text-transform: uppercase;
+    }
+    :global(p){
+        padding: 0;
+        margin: 0;
+        color: var(--title-color);
+        font-size: 16px;
+    }
+    :global(h1){
+        font-size: 80px;
+    }
+    :global(h2){
+        font-size: 56px;
+    }
+    :global(h3){
+        font-size: 24px;
+    }
+    :global(h4){
+        font-size: 16px;
+    }
+    :global(h5){
+        font-size: 16px;
+        letter-spacing: 2.7px;
+        color: var(--text-color);
     }
     :global(button){
         cursor: pointer;
@@ -94,6 +123,45 @@
     .main__image {
         width: 100%;
         height: 100%;
+    }
+
+    @media (min-width: 768px) {
+        :global(h1){
+            font-size: 150px;
+        }
+        :global(h2){
+            font-size: 80px;
+        }
+        :global(h3){
+            font-size: 40px;
+        }
+        :global(h4){
+            font-size: 24px;
+        }
+        :global(h5){
+            font-size: 20px;
+            letter-spacing: 3.38px;
+        }
+
+    }
+
+    @media (min-width: 1440px) {
+        :global(h2){
+            font-size: 100px;
+        }
+        :global(h3){
+            font-size: 56px;
+        }
+        :global(h4){
+            font-size: 32px;
+        }
+        :global(h5){
+            font-size: 28px;
+            letter-spacing: 4.74px;
+        }
+        :global(p){
+            font-size: 18px;
+        }
     }
 
 </style>
