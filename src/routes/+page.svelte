@@ -1,6 +1,7 @@
 <script lang="ts">
     import {marked} from "marked";
     import {onMount} from "svelte";
+    import ExploreButton from "$lib/components/ExploreButton.svelte";
 
     export let data;
     const strapiURL = import.meta.env.VITE_STRAPI_URL
@@ -54,6 +55,7 @@
         <div>
             {@html content}
         </div>
+        <ExploreButton />
     </section>
 </main>
 
@@ -62,6 +64,10 @@
         font-family: "Barlow Condensed", sans-serif;
         margin: 0;
         max-height: fit-content;
+    }
+
+    :global(h1, h2, h3, h4, h5){
+        font-family: "Bellefair", serif;
     }
 
     .main__content-section {
