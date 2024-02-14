@@ -4,7 +4,7 @@
     export let navItems: NavType;
 </script>
 
-<ul>
+<ul class="navigation-list">
     {#each navItems as navItem, i (i)}
         <NavigationItem
                 navItem={navItem}
@@ -12,3 +12,11 @@
         />
     {/each}
 </ul>
+
+<style>
+    .navigation-list {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+</style>

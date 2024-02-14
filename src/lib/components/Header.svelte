@@ -35,7 +35,10 @@
                 class="header-menu__dropdown-container"
                 class:shown={isMenuOpened}
         >
-            <button on:click={() => isMenuOpened = false}>
+            <button
+                    class="header-menu__button"
+                    on:click={() => isMenuOpened = false}
+            >
                 <CloseIcon />
             </button>
             <slot />
@@ -89,6 +92,7 @@
     }
     .header-menu__dropdown-container.shown {
         display: flex;
+        gap: 65px;
         position: absolute;
         top: 0;
         left: auto;
@@ -99,6 +103,16 @@
         height: 100dvh;
         max-height: 100vh;
         width: 68%;
+    }
+    .header-menu__button {
+        border: none;
+        background: none;
+        display: flex;
+        margin: 0 0 0 auto;
+        color: var(--text-color);
+    }
+    .header-menu__button:hover {
+        opacity: 70%;
     }
 
     @media (min-width: 768px) {
