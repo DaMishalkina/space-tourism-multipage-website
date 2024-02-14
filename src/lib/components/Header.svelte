@@ -57,7 +57,6 @@
         max-width: 1385px;
         margin: 0 auto;
         box-sizing: border-box;
-        position: relative;
     }
     .header__logo {
         width: 40px;
@@ -100,9 +99,9 @@
         bottom: 0;
         background-color: rgba(255, 255, 255, .15);
         backdrop-filter: blur(10px);
-        height: 100dvh;
         max-height: 100vh;
         width: 68%;
+        z-index: 10;
     }
     .header-menu__button {
         border: none;
