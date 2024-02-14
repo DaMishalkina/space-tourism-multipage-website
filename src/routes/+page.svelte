@@ -40,7 +40,7 @@
         <picture class="main__picture">
                 <source
                     srcset={bgImages.desktop}
-                    media="(min-width: 1200px)"
+                    media="(min-width: 1440px)"
                 />
                 <source
                     srcset={bgImages.tablet}

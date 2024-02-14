@@ -88,9 +88,6 @@
         display: none;
         flex-direction: column;
         padding: 34px 27px 34px 32px;
-    }
-    .header-menu__dropdown-container.shown {
-        display: flex;
         gap: 65px;
         position: absolute;
         top: 0;
@@ -102,6 +99,9 @@
         max-height: 100vh;
         width: 68%;
         z-index: 10;
+    }
+    .header-menu__dropdown-container.shown {
+        display: flex;
     }
     .header-menu__button {
         border: none;
@@ -116,11 +116,28 @@
 
     @media (min-width: 768px) {
         .header {
+            padding: 24px 40px;
 
         }
         .header__logo {
             width: 48px;
             height: 48px;
+        }
+        .header__toggle {
+            display: none;
+        }
+        .header-menu__dropdown-container {
+            display: flex;
+            width: fit-content;
+            position: unset;
+            margin: -24px -40px;
+            backdrop-filter: unset;
+            background-color: rgba(255, 255, 255, .04);
+            padding: 39px 47px;
+
+        }
+        .header-menu__button {
+            display: none;
         }
 
     }
