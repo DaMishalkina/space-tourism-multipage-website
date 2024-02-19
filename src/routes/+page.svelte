@@ -7,27 +7,27 @@
     import Header from "$lib/components/Header.svelte";
 
     export let data;
-    const strapiURL = import.meta.env.VITE_STRAPI_URL
-    let bgImages: { [key: string]: string };
     console.log(data);
+    const strapiURL = import.meta.env.VITE_STRAPI_URL
+    let bgImageMobile = "";
+    let bgImageTablet = "";
+    let bgImageDesktop = "";
     let content = data?.page?.data?.attributes?.text;
     onMount(async () => {
         content = marked.parse(data?.page?.data?.attributes?.text);
-        bgImages = Object.fromEntries(data?.page?.data?.attributes?.image?.data?.map((image: {[key: string]: {[key: string]: string | number}}) => {
-            let res;
+       data?.page?.data?.attributes?.image?.data?.map((image: {[key: string]: {[key: string]: string | number}}) => {
             switch (image?.attributes?.width){
                 case 375:
-                    res = ["mobile", `${strapiURL}${image?.attributes?.url}`];
+                    bgImageMobile = `${strapiURL}${image?.attributes?.url}`;
                     break;
                 case 768:
-                    res = ["tablet", `${strapiURL}${image?.attributes?.url}`];
+                    bgImageTablet =`${strapiURL}${image?.attributes?.url}`;
                     break;
                 default:
-                    res = ["desktop", `${strapiURL}${image?.attributes?.url}`];
+                    bgImageDesktop = `${strapiURL}${image?.attributes?.url}`;
                     break;
             }
-            return res;
-        }))
+        });
     });
 
     const navigationLinks = ["home", "destination", "crew", "technology"];
@@ -35,34 +35,18 @@
 
 </script>
 
-<main class="main">
-    {#if bgImages}
-        <picture class="main__picture">
-                <source
-                    srcset={bgImages.desktop}
-                    media="(min-width: 1440px)"
-                />
-                <source
-                    srcset={bgImages.tablet}
-                    media="(min-width: 768px)"
-                />
-                <img
-                    class="main__image"
-                    src={bgImages.mobile}
-                    alt="Background with Earth"
-                />
-            </picture>
-
-    {/if}
+<main class="main"
+      style="--bg-image: url({bgImageMobile});--bg-image--md: url({bgImageTablet});--bg-image--lg: url({bgImageDesktop})"
+>
     <section class="main__content-section">
         <Header>
             <NavigationBar>
                 <NavigationList navItems={navigationLinks} />
             </NavigationBar>
         </Header>
-        <h5>{data?.page?.data?.attributes?.tagline}</h5>
-        <h1>{data?.page?.data?.attributes?.title}</h1>
-        <div>
+        <h5 class="main__tagline">{data?.page?.data?.attributes?.tagline}</h5>
+        <h1 class="main__title">{data?.page?.data?.attributes?.title}</h1>
+        <div class="main__text">
             {@html content}
         </div>
         <ExploreButton />
@@ -73,7 +57,7 @@
     :global(body){
         font-family: "Barlow Condensed", sans-serif;
         margin: 0;
-        max-height: fit-content;
+        max-height: 100dvh;
     }
 
     :global(h1, h2, h3, h4, h5){
@@ -132,18 +116,9 @@
         position: relative;
         height: 100dvh;
         max-height: 100dvh;
-    }
-    .main__picture {
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-    .main__image {
-        width: 100%;
-        height: 100%;
+        background-image: var(--bg-image);
+        background-size: cover;
+
     }
 
     @media (min-width: 768px) {
@@ -164,6 +139,10 @@
             letter-spacing: 3.38px;
         }
 
+        .main {
+            background-image: var(--bg-image--md);
+        }
+
     }
 
     @media (min-width: 1440px) {
@@ -182,6 +161,10 @@
         }
         :global(p){
             font-size: 18px;
+        }
+
+        .main {
+            background-image: var(--bg-image--lg);
         }
     }
 

@@ -2,6 +2,6 @@
 
 </script>
 
-<nav class>
+<nav>
     <slot />
 </nav>

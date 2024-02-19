@@ -1,5 +1,7 @@
 <script lang="ts">
-    export let title = "Button", onClick: void | undefined = undefined;
+    import type {MouseEventHandler} from "svelte/elements";
+
+    export let title = "Button", onClick: MouseEventHandler<HTMLButtonElement> | null | undefined = undefined;
 </script>
 
 <button on:click={onClick} class="button--explore">
