@@ -19,12 +19,15 @@
             switch (image?.attributes?.width){
                 case 375:
                     bgImageMobile = `${strapiURL}${image?.attributes?.url}`;
+                    document.body.style.setProperty("--bg-image", `url('${bgImageMobile}')`);
                     break;
                 case 768:
                     bgImageTablet =`${strapiURL}${image?.attributes?.url}`;
+                    document.body.style.setProperty("--bg-image--md", `url('${bgImageTablet}')`);
                     break;
                 default:
                     bgImageDesktop = `${strapiURL}${image?.attributes?.url}`;
+                    document.body.style.setProperty("--bg-image--lg", `url('${bgImageDesktop}')`);
                     break;
             }
         });
@@ -35,29 +38,32 @@
 
 </script>
 
-<main class="main"
-      style="--bg-image: url({bgImageMobile});--bg-image--md: url({bgImageTablet});--bg-image--lg: url({bgImageDesktop})"
->
+<Header>
+    <NavigationBar>
+        <NavigationList navItems={navigationLinks} />
+    </NavigationBar>
+</Header>
+<main class="main">
     <section class="main__content-section">
-        <Header>
-            <NavigationBar>
-                <NavigationList navItems={navigationLinks} />
-            </NavigationBar>
-        </Header>
         <h5 class="main__tagline">{data?.page?.data?.attributes?.tagline}</h5>
         <h1 class="main__title">{data?.page?.data?.attributes?.title}</h1>
         <div class="main__text">
             {@html content}
         </div>
-        <ExploreButton />
     </section>
+    <ExploreButton title={data?.page?.data?.attributes?.button_label} />
 </main>
 
 <style>
     :global(body){
         font-family: "Barlow Condensed", sans-serif;
         margin: 0;
+        height: 100dvh;
         max-height: 100dvh;
+        background-image: var(--bg-image);
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
     }
 
     :global(h1, h2, h3, h4, h5){
@@ -72,8 +78,10 @@
     :global(p){
         padding: 0;
         margin: 0;
-        color: var(--title-color);
+        color: var(--text-color);
         font-size: 16px;
+        font-weight: 300;
+        line-height: 25px;
     }
     :global(h1){
         font-size: 80px;
@@ -94,6 +102,7 @@
     }
     :global(button){
         cursor: pointer;
+        outline: none;
     }
     :global(a){
         text-decoration: none;
@@ -111,17 +120,27 @@
         display: flex;
         flex-direction: column;
         color: #fff;
+        align-items: center;
+        gap: 16px;
     }
     .main {
         position: relative;
-        height: 100dvh;
-        max-height: 100dvh;
-        background-image: var(--bg-image);
-        background-size: cover;
-
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 24px 24px 48px 24px;
+    }
+    .main > :global(button) {
+        margin: auto auto 0 auto;
+    }
+    .main__text {
+        text-align: center;
     }
 
     @media (min-width: 768px) {
+        :global(body) {
+            background-image: var(--bg-image--md);
+        }
         :global(h1){
             font-size: 150px;
         }
@@ -139,13 +158,12 @@
             letter-spacing: 3.38px;
         }
 
-        .main {
-            background-image: var(--bg-image--md);
-        }
-
     }
 
     @media (min-width: 1440px) {
+        :global(body) {
+            background-image: var(--bg-image--lg);
+        }
         :global(h2){
             font-size: 100px;
         }
@@ -161,10 +179,6 @@
         }
         :global(p){
             font-size: 18px;
-        }
-
-        .main {
-            background-image: var(--bg-image--lg);
         }
     }
 

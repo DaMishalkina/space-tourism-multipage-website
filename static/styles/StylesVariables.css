@@ -3,4 +3,7 @@
     --title-color: #FFF;
     --text-color: #D0D6F9;
     --hover-color: rgba(255, 255, 255, 10.36%);
+    --bg-image: none;
+    --bg-image--md: none;
+    --bg-image--lg: none;
 }
