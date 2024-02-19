@@ -99,6 +99,7 @@
         font-size: 16px;
         letter-spacing: 2.7px;
         color: var(--text-color);
+        font-family: "Barlow Condensed", sans-serif;
     }
     :global(button){
         cursor: pointer;
@@ -135,6 +136,7 @@
     }
     .main__text {
         text-align: center;
+        max-width: 444px;
     }
 
     @media (min-width: 768px) {
@@ -156,6 +158,13 @@
         :global(h5){
             font-size: 20px;
             letter-spacing: 3.38px;
+        }
+        .main {
+            padding: 106px 24px 90px 24px;
+            gap: 24px;
+        }
+        .main__content-section {
+            gap: 24px;
         }
 
     }
@@ -179,6 +188,26 @@
         }
         :global(p){
             font-size: 18px;
+        }
+        .main {
+            flex-direction: row;
+            padding: 24px 24px 165px 24px;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto auto;
+           flex: unset;
+
+        }
+        .main > :global(button){
+            margin: auto 0 0 0;
+        }
+        .main__content-section {
+            align-items: unset;
+        }
+        .main__text {
+            text-align: unset;
         }
     }
 

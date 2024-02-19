@@ -38,14 +38,14 @@
             font-size: 14px;
             letter-spacing: 2.36px;
         }
-        .navigation-item__link.active {
+        .navigation-item__link.active, .navigation-item__link:active {
             border-bottom: solid 3px var(--title-color);
         }
         .navigation-item__link:hover {
             margin-bottom: -39px;
             padding-bottom: 36px;
             color: var(--title-color);
-            border-bottom: solid 3px var(--hover-color);
+            border-bottom: solid 3px rgba(255, 255, 255, 0.5);
         }
         .navigation-item__index {
             display: none;
