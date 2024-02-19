@@ -7,7 +7,7 @@
     import Header from "$lib/components/Header.svelte";
 
     export let data;
-    console.log(data);
+    console.log(data)
     const strapiURL = import.meta.env.VITE_STRAPI_URL
     let bgImageMobile = "";
     let bgImageTablet = "";
