@@ -19,7 +19,8 @@
             class="header__logo"
     />
     <div class="header-menu header__menu" use:clickOutside={() => isMenuOpened = false}>
-       <label
+        <div class="header__desktop-line"></div>
+        <label
                class="header-toggle header__toggle"
                class:header-toggle--hidden={isMenuOpened}
        >
@@ -54,13 +55,16 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
-        max-width: 1385px;
         margin: 0 auto;
         box-sizing: border-box;
+        align-items: center;
     }
     .header__logo {
         width: 40px;
         height: 40px;
+    }
+    .header__desktop-line {
+        display: none;
     }
     .header-menu {
         display: flex;
@@ -126,11 +130,13 @@
         .header__toggle {
             display: none;
         }
+        .header-menu {
+            margin: -24px -40px;
+        }
         .header-menu__dropdown-container {
             display: flex;
             width: fit-content;
             position: unset;
-            margin: -24px -40px;
             backdrop-filter: unset;
             background-color: rgba(255, 255, 255, .04);
             padding: 39px 47px;
@@ -140,5 +146,33 @@
             display: none;
         }
 
+
+    }
+    @media (min-width: 1440px) {
+        .header {
+            padding: 40px 55px;
+        }
+
+        .header__desktop-line {
+            display: block;
+            background: var(--hover-color);
+            width: 60%;
+            height: 1px;
+            position: absolute;
+            top: 50%;
+            left: -60%;
+            transform: translate(30px, 50%);
+        }
+
+        .header-menu {
+            margin: 0 -55px;
+            min-width: 57%;
+            position: relative;
+        }
+
+        .header-menu__dropdown-container {
+            width: 100%;
+            align-items: center;
+        }
     }
 </style>

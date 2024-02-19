@@ -18,18 +18,16 @@
         text-transform: uppercase;
         font-size: 16px;
         letter-spacing: 2.7px;
+        display: flex;
+        gap: 12px;
     }
     .navigation-item__link:hover {
         color: var(--text-color);
     }
     .navigation-item__index {
         font-weight: bold;
-        margin-right: 12px;
     }
     @media (min-width: 768px) {
-        .navigation-item {
-
-        }
         .navigation-item__link {
             font-size: 14px;
             letter-spacing: 2.36px;
@@ -44,5 +42,13 @@
             display: none;
         }
 
+    }
+    @media (min-width: 1440px) {
+        .navigation-item__link {
+            font-size: 16px;
+        }
+        .navigation-item__index {
+            display: block;
+        }
     }
 </style>

@@ -25,6 +25,10 @@
             gap: 37px;
             flex-direction: row;
         }
-
+    }
+    @media (min-width: 1440px) {
+        .navigation-list {
+            gap: 48px;
+        }
     }
 </style>
