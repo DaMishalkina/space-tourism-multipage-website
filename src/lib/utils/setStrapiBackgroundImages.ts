@@ -1,4 +1,4 @@
-import type {StrapiObjectType} from "../types/intex";
+import type {StrapiObjectType} from "../types";
 
 export const setStrapiBackgroundImages = (sourceUrl: string, data: {[key: string]: StrapiObjectType}) => {
     const bgImagesUrls = {

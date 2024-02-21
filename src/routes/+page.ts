@@ -19,23 +19,23 @@ export const load: PageLoad = async ({fetch}) => {
                 throw new Error(`HTTP error: ${pageDataResponse.status}`)
             }
             const page = await pageDataResponse.json();
-            const allSlugsResponses = await fetch(
-                " http://localhost:1337/api/content-pages?_select=slug",
-
-                {
-                    headers: {
-                        "Authorization": `Bearer ${apiKey}`,
-                        "Content-Type": "application/json"
-                    }
-                }
-            );
-            if(!allSlugsResponses.ok){
-                throw new Error(`HTTP error: ${allSlugsResponses.status}`)
-            }
-            const slugs = await allSlugsResponses.json();
+            // const allSlugsResponses = await fetch(
+            //     " http://localhost:1337/api/content-pages?_select=slug",
+            //
+            //     {
+            //         headers: {
+            //             "Authorization": `Bearer ${apiKey}`,
+            //             "Content-Type": "application/json"
+            //         }
+            //     }
+            // );
+            // if(!allSlugsResponses.ok){
+            //     throw new Error(`HTTP error: ${allSlugsResponses.status}`)
+            // }
+            // const slugs = await allSlugsResponses.json();
             return {
                 page: page,
-                slugs: slugs
+                // slugs: slugs
             }
         } catch (error){
             console.error(error);

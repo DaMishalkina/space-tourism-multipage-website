@@ -4,10 +4,22 @@
     import Header from "$lib/components/Header.svelte";
     import NavigationBar from "$lib/components/Naviagation/NavigationBar.svelte";
     import NavigationList from "$lib/components/Naviagation/NavigationList.svelte";
+    import type {StrapiObjectType} from "../lib/types";
+
+    export let data;
+    let headers: {[key: string]: string}[] = [{"home": ""}];
+    $: {
+        data?.slugs?.data.map((slugPage: StrapiObjectType) => {
+            const header: { [key: string]: string } = {};
+            header[slugPage?.attributes?.slug as string] = slugPage?.attributes?.slug as string;
+            headers.push(header);
+        })
+        $sharedHeaders = headers
+    }
 </script>
 
 <svelte:head>
-    <link rel="stylesheet" href={base +`/styles/StylesVariables.css`} />
+    <link rel="stylesheet" href={base +`/styles/global.css`} />
 </svelte:head>
 <Header>
     <NavigationBar>

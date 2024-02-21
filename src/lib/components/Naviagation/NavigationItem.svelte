@@ -9,7 +9,7 @@
 <li class="navigation-item">
     <a
             class="navigation-item__link"
-            class:active={$page.url.pathname === Object.values(navItem)[0]}
+            class:active={$page.url.pathname === "/" + Object.values(navItem)[0]}
             href={base + `/${Object.values(navItem)[0]}`}
     >
         <span class="navigation-item__index">0{index}</span>
@@ -24,6 +24,7 @@
         letter-spacing: 2.7px;
         display: flex;
         gap: 12px;
+
     }
     .navigation-item__link:hover {
         color: var(--text-color);
@@ -37,6 +38,7 @@
             padding-bottom: 36px;
             letter-spacing: 2.36px;
             margin-bottom: -39px;
+            border-bottom: solid 3px transparent;
         }
         .navigation-item__link.active, .navigation-item__link:active {
             border-bottom: solid 3px var(--title-color);
