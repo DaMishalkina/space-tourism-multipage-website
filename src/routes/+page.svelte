@@ -2,32 +2,18 @@
     import {marked} from "marked";
     import {onMount} from "svelte";
     import ExploreButton from "$lib/components/ExploreButton.svelte";
+    import {setStrapiBackgroundImages} from "$lib/utils/setStrapiBackgroundImages";
     import {sharedHeaders} from "$lib/stores/headers";
+    import type {StrapiImageType} from "../lib/types/intex";
 
     export let data;
     const strapiURL = import.meta.env.VITE_STRAPI_URL
-    let bgImageMobile = "";
-    let bgImageTablet = "";
-    let bgImageDesktop = "";
     let content = data?.page?.data?.attributes?.text;
     let headers: {[key: string]: string}[] = [{"home": ""}];
     onMount(async () => {
         content = marked.parse(data?.page?.data?.attributes?.text);
-        data?.page?.data?.attributes?.image?.data?.map((image: {[key: string]: {[key: string]: string | number}}) => {
-            switch (image?.attributes?.width){
-                case 375:
-                    bgImageMobile = `${strapiURL}${image?.attributes?.url}`;
-                    document.body.style.setProperty("--bg-image", `url('${bgImageMobile}')`);
-                    break;
-                case 768:
-                    bgImageTablet =`${strapiURL}${image?.attributes?.url}`;
-                    document.body.style.setProperty("--bg-image--md", `url('${bgImageTablet}')`);
-                    break;
-                default:
-                    bgImageDesktop = `${strapiURL}${image?.attributes?.url}`;
-                    document.body.style.setProperty("--bg-image--lg", `url('${bgImageDesktop}')`);
-                    break;
-            }
+        data?.page?.data?.attributes?.image?.data?.map((image: StrapiImageType) => {
+           setStrapiBackgroundImages(strapiURL, image);
         });
         data?.slugs?.data.map((slugPage) => {
             const header = {};
