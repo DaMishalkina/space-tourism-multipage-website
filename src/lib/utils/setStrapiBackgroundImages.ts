@@ -1,6 +1,6 @@
-import type {StrapiImageType} from "../types/intex";
+import type {StrapiObjectType} from "../types/intex";
 
-export const setStrapiBackgroundImages = (sourceUrl: string, image: StrapiImageType) => {
+export const setStrapiBackgroundImages = (sourceUrl: string, image: StrapiObjectType) => {
     switch (image?.attributes?.width){
         case 375:
             const bgImageMobile = `${sourceUrl}${image?.attributes?.url}`;

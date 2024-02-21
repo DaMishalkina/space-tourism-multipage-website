@@ -4,7 +4,7 @@
     import ExploreButton from "$lib/components/ExploreButton.svelte";
     import {setStrapiBackgroundImages} from "$lib/utils/setStrapiBackgroundImages";
     import {sharedHeaders} from "$lib/stores/headers";
-    import type {StrapiImageType} from "../lib/types/intex";
+    import type {StrapiObjectType} from "../lib/types/intex";
 
     export let data;
     const strapiURL = import.meta.env.VITE_STRAPI_URL
@@ -12,12 +12,12 @@
     let headers: {[key: string]: string}[] = [{"home": ""}];
     onMount(async () => {
         content = marked.parse(data?.page?.data?.attributes?.text);
-        data?.page?.data?.attributes?.image?.data?.map((image: StrapiImageType) => {
+        data?.page?.data?.attributes?.image?.data?.map((image: StrapiObjectType) => {
            setStrapiBackgroundImages(strapiURL, image);
         });
-        data?.slugs?.data.map((slugPage) => {
-            const header = {};
-            header[slugPage?.attributes?.slug] = slugPage?.attributes?.slug;
+        data?.slugs?.data.map((slugPage: StrapiObjectType) => {
+            const header: { [key: string]: string } = {};
+            header[slugPage?.attributes?.slug as string] = slugPage?.attributes?.slug as string;
             headers.push(header);
         })
         $sharedHeaders = headers

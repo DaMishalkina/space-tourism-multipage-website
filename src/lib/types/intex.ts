@@ -1,10 +1,10 @@
-export type StrapiImageType = {
-    attributes: {
-        id: number,
-        width: number,
-        url: string,
-        [key: string]: string | null | number
-    }
+export type StrapiObjectAttributesType = {
+    [key: string]: string | null | number
 }
+export interface StrapiObjectInterface {
+    [key: string]: string | null | number
+}
+export type StrapiObjectType = StrapiObjectInterface & {
+    attributes: StrapiObjectAttributesType
 
-export type StrapiImagesType = StrapiImageType[];
+}
