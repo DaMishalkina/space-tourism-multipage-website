@@ -1,9 +1,7 @@
 <script lang="ts">
     import type {NavItemType} from "./types";
     import {base} from "$app/paths";
-    import { page } from '$app/stores';
-
-
+    import { page } from "$app/stores";
     export let navItem: NavItemType, index: number;
 
 </script>
@@ -11,11 +9,11 @@
 <li class="navigation-item">
     <a
             class="navigation-item__link"
-            class:active={$page.url.pathname === navItem}
-            href={base + navItem}
+            class:active={$page.url.pathname === Object.values(navItem)[0]}
+            href={base + `/${Object.values(navItem)[0]}`}
     >
         <span class="navigation-item__index">0{index}</span>
-        {navItem}
+        {Object.keys(navItem)[0]}
     </a>
 </li>
 
@@ -36,14 +34,14 @@
     @media (min-width: 768px) {
         .navigation-item__link {
             font-size: 14px;
+            padding-bottom: 36px;
             letter-spacing: 2.36px;
+            margin-bottom: -39px;
         }
         .navigation-item__link.active, .navigation-item__link:active {
             border-bottom: solid 3px var(--title-color);
         }
         .navigation-item__link:hover {
-            margin-bottom: -39px;
-            padding-bottom: 36px;
             color: var(--title-color);
             border-bottom: solid 3px rgba(255, 255, 255, 0.5);
         }

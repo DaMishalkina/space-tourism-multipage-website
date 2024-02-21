@@ -2,20 +2,18 @@
     import {marked} from "marked";
     import {onMount} from "svelte";
     import ExploreButton from "$lib/components/ExploreButton.svelte";
-    import NavigationBar from "$lib/components/Naviagation/NavigationBar.svelte";
-    import NavigationList from "$lib/components/Naviagation/NavigationList.svelte";
-    import Header from "$lib/components/Header.svelte";
+    import {sharedHeaders} from "$lib/stores/headers";
 
     export let data;
-    console.log(data)
     const strapiURL = import.meta.env.VITE_STRAPI_URL
     let bgImageMobile = "";
     let bgImageTablet = "";
     let bgImageDesktop = "";
     let content = data?.page?.data?.attributes?.text;
+    let headers: {[key: string]: string}[] = [{"home": ""}];
     onMount(async () => {
         content = marked.parse(data?.page?.data?.attributes?.text);
-       data?.page?.data?.attributes?.image?.data?.map((image: {[key: string]: {[key: string]: string | number}}) => {
+        data?.page?.data?.attributes?.image?.data?.map((image: {[key: string]: {[key: string]: string | number}}) => {
             switch (image?.attributes?.width){
                 case 375:
                     bgImageMobile = `${strapiURL}${image?.attributes?.url}`;
@@ -31,18 +29,18 @@
                     break;
             }
         });
+        data?.slugs?.data.map((slugPage) => {
+            const header = {};
+            header[slugPage?.attributes?.slug] = slugPage?.attributes?.slug;
+            headers.push(header);
+        })
+        $sharedHeaders = headers
+
     });
-
-    const navigationLinks = ["home", "destination", "crew", "technology"];
-
 
 </script>
 
-<Header>
-    <NavigationBar>
-        <NavigationList navItems={navigationLinks} />
-    </NavigationBar>
-</Header>
+
 <main class="main">
     <section class="main__content-section">
         <h5 class="main__tagline">{data?.page?.data?.attributes?.tagline}</h5>
@@ -64,6 +62,7 @@
         background-size: cover;
         display: flex;
         flex-direction: column;
+
     }
 
     :global(h1, h2, h3, h4, h5){

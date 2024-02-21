@@ -1,2 +1,2 @@
-export type NavItemType = string;
+export type NavItemType = {[key: string]: string};
 export type NavType = NavItemType[];
