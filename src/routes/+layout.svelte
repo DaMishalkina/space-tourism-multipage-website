@@ -4,9 +4,6 @@
     import Header from "$lib/components/Header.svelte";
     import NavigationBar from "$lib/components/Naviagation/NavigationBar.svelte";
     import NavigationList from "$lib/components/Naviagation/NavigationList.svelte";
-
-    // const receivedHeaders = getContext("headers");
-    console.log($sharedHeaders)
 </script>
 
 <svelte:head>

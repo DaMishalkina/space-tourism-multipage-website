@@ -6,7 +6,7 @@ export const load: PageLoad = async ({fetch}) => {
 
             const apiKey = import.meta.env.VITE_MY_STRAPI_API_KEY;
             const pageDataResponse = await fetch(
-                " http://localhost:1337/api/home?populate=image.image",
+                " http://localhost:1337/api/home?populate=bgImage.image",
 
                 {
                     headers: {

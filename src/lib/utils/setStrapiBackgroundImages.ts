@@ -1,19 +1,24 @@
 import type {StrapiObjectType} from "../types/intex";
 
-export const setStrapiBackgroundImages = (sourceUrl: string, image: StrapiObjectType) => {
-    switch (image?.attributes?.width){
-        case 375:
-            const bgImageMobile = `${sourceUrl}${image?.attributes?.url}`;
-            document.body.style.setProperty("--bg-image", `url('${bgImageMobile}')`);
-            break;
-        case 768:
-            const  bgImageTablet =`${sourceUrl}${image?.attributes?.url}`;
-            document.body.style.setProperty("--bg-image--md", `url('${bgImageTablet}')`);
-            break;
-        default:
-            const bgImageDesktop = `${sourceUrl}${image?.attributes?.url}`;
-            document.body.style.setProperty("--bg-image--lg", `url('${bgImageDesktop}')`);
-            break;
-    }
+export const setStrapiBackgroundImages = (sourceUrl: string, data: {[key: string]: StrapiObjectType}) => {
+    const bgImagesUrls = {
+        bgImageMobile: "",
+        bgImageTablet: "",
+        bgImageDesktop: ""
+    };
+    ((data?.attributes?.bgImage as StrapiObjectType)?.data as StrapiObjectType[])?.map((image: StrapiObjectType) => {
+        switch (image?.attributes?.width){
+            case 375:
+                bgImagesUrls.bgImageMobile = `${sourceUrl}${image?.attributes?.url}`;
+                break;
+            case 768:
+                bgImagesUrls.bgImageTablet =`${sourceUrl}${image?.attributes?.url}`;
+                break;
+            default:
+                bgImagesUrls.bgImageDesktop = `${sourceUrl}${image?.attributes?.url}`;
+                break;
+        }
+    })
+    return bgImagesUrls;
 
 }

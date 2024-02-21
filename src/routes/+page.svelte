@@ -7,14 +7,15 @@
     import type {StrapiObjectType} from "../lib/types/intex";
 
     export let data;
-    const strapiURL = import.meta.env.VITE_STRAPI_URL
+    const strapiURL = import.meta.env.VITE_STRAPI_URL;
     let content = data?.page?.data?.attributes?.text;
     let headers: {[key: string]: string}[] = [{"home": ""}];
     onMount(async () => {
         content = marked.parse(data?.page?.data?.attributes?.text);
-        data?.page?.data?.attributes?.image?.data?.map((image: StrapiObjectType) => {
-           setStrapiBackgroundImages(strapiURL, image);
-        });
+        const bgImagesUrls = setStrapiBackgroundImages(strapiURL, data?.page?.data);
+        document.body.style.setProperty("--bg-image", `url('${bgImagesUrls.bgImageMobile}')`);
+        document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.bgImageTablet}')`);
+        document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.bgImageDesktop}')`);
         data?.slugs?.data.map((slugPage: StrapiObjectType) => {
             const header: { [key: string]: string } = {};
             header[slugPage?.attributes?.slug as string] = slugPage?.attributes?.slug as string;
