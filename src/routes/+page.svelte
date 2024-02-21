@@ -5,17 +5,24 @@
     import {setStrapiBackgroundImages} from "$lib/utils/setStrapiBackgroundImages";
     import {sharedHeaders} from "$lib/stores/headers";
     import type {StrapiObjectType} from "../lib/types/intex";
+    import {browser} from "$app/environment";
 
     export let data;
     const strapiURL = import.meta.env.VITE_STRAPI_URL;
     let content = data?.page?.data?.attributes?.text;
     let headers: {[key: string]: string}[] = [{"home": ""}];
+    let bgImagesUrls: {[key: string]: string};
+    $: {
+        bgImagesUrls = setStrapiBackgroundImages(strapiURL, data?.page?.data);
+        if(browser){
+            document.body.style.setProperty("--bg-image", `url('${bgImagesUrls.bgImageMobile}')`);
+            document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.bgImageTablet}')`);
+            document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.bgImageDesktop}')`);
+        }
+
+    }
     onMount(async () => {
         content = marked.parse(data?.page?.data?.attributes?.text);
-        const bgImagesUrls = setStrapiBackgroundImages(strapiURL, data?.page?.data);
-        document.body.style.setProperty("--bg-image", `url('${bgImagesUrls.bgImageMobile}')`);
-        document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.bgImageTablet}')`);
-        document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.bgImageDesktop}')`);
         data?.slugs?.data.map((slugPage: StrapiObjectType) => {
             const header: { [key: string]: string } = {};
             header[slugPage?.attributes?.slug as string] = slugPage?.attributes?.slug as string;
@@ -49,7 +56,7 @@
         background-size: cover;
         display: flex;
         flex-direction: column;
-
+        background-color: var(--bg-color);
     }
 
     :global(h1, h2, h3, h4, h5){

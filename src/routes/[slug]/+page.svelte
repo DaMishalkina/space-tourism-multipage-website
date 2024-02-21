@@ -1,17 +1,18 @@
 <script lang="ts">
-    import {onMount} from "svelte";
+    import { browser } from '$app/environment';
     import {setStrapiBackgroundImages} from "$lib/utils/setStrapiBackgroundImages";
     export let data;
 
     const strapiURL = import.meta.env.VITE_STRAPI_URL;
-    onMount(async () => {
-        // content = marked.parse(data?.page?.data?.attributes?.text);
-        const bgImagesUrls = setStrapiBackgroundImages(strapiURL, data?.page?.data[0]);
-        document.body.style.setProperty("--bg-image", `url('${bgImagesUrls.bgImageMobile}')`);
-        document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.bgImageTablet}')`);
-        document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.bgImageDesktop}')`);
-
-    });
+    let bgImagesUrls: {[key: string]: string};
+    $: {
+        bgImagesUrls = setStrapiBackgroundImages(strapiURL, data?.page?.data[0]);
+        if(browser){
+            document.body.style.setProperty("--bg-image", `url('${bgImagesUrls.bgImageMobile}')`);
+            document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.bgImageTablet}')`);
+            document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.bgImageDesktop}')`);
+        }
+    }
 </script>
 
 <main>
@@ -28,6 +29,7 @@
         background-size: cover;
         display: flex;
         flex-direction: column;
+        background-color: var(--bg-color);
     }
     @media (min-width: 768px) {
         :global(body) {
