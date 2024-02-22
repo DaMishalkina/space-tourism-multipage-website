@@ -18,7 +18,6 @@
                 >
                     <input
                             class="slider-button__hidden-input"
-                            checked={sliderTransformationIndex === i}
                             value={i}
                             type="radio"
                             id={slide.title}
@@ -31,7 +30,7 @@
     <div class="slider__container">
         <ul
                 class="slider__slides"
-                style="transform: translateX({-sliderTransformationIndex*100}%)"
+                style={`transform: translateX(${-sliderTransformationIndex*100}%)`}
         >
             {#each slides as slide, i(i)}
                 <Slide
