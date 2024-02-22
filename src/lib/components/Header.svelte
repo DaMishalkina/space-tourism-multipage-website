@@ -26,6 +26,7 @@
        >
            <HamburgerIcon />
            <input
+                   id="toggle-header-menu"
                    class="header-toggle__input"
                    on:change|preventDefault={toggle}
                    type="checkbox"

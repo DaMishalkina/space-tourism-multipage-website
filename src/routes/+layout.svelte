@@ -21,9 +21,11 @@
 <svelte:head>
     <link rel="stylesheet" href={base +`/styles/global.css`} />
 </svelte:head>
-<Header>
-    <NavigationBar>
-        <NavigationList navItems={$sharedHeaders} />
-    </NavigationBar>
-</Header>
+{#if data?.slugs}
+    <Header>
+        <NavigationBar>
+            <NavigationList navItems={$sharedHeaders} />
+        </NavigationBar>
+    </Header>
+{/if}
 <slot />

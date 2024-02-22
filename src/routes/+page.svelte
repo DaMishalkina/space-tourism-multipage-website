@@ -26,14 +26,16 @@
 
 
 <main class="main">
-    <section class="main__content-section">
-        <h5 class="main__tagline">{data?.page?.data?.attributes?.tagline}</h5>
-        <h1 class="main__title">{data?.page?.data?.attributes?.title}</h1>
-        <div class="main__text">
-            {@html content}
-        </div>
-    </section>
-    <ExploreButton title={data?.page?.data?.attributes?.button_label} />
+    {#if data?.page}
+        <section class="main__content-section">
+            <h5 class="main__tagline">{data?.page?.data?.attributes?.tagline}</h5>
+            <h1 class="main__title">{data?.page?.data?.attributes?.title}</h1>
+            <div class="main__text">
+                {@html content}
+            </div>
+        </section>
+        <ExploreButton title={data?.page?.data?.attributes?.button_label} />
+    {/if}
 </main>
 
 <style>
