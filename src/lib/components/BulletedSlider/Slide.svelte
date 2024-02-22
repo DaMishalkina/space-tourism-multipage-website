@@ -34,10 +34,15 @@
 
 <style>
     .slide {
+        flex-shrink: 0;
         display: flex;
         flex-direction: column-reverse;
         gap: 74px;
         align-items: center;
+        width: 100vw;
+        height: 100%;
+        padding: 0 24px;
+        box-sizing: border-box;
     }
     .slide__text-container {
         display: flex;
@@ -65,6 +70,7 @@
         justify-content: center;
         width: 100%;
         border-bottom: 1px solid #383B4B;
+        box-sizing: border-box;
     }
     .slide__image {
         height: 222px;

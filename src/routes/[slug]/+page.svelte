@@ -4,12 +4,14 @@
     import Slider from "$lib/components/BulletedSlider/Slider.svelte";
     import type {StrapiObjectType} from "../../lib/types";
     import type {SlidesType} from "../../lib/types";
+    import {sharedHeaders} from "$lib/stores/headers";
 
     export let data;
-
+    console.log(data)
     const strapiURL = import.meta.env.VITE_STRAPI_URL;
     let bgImagesUrls: {[key: string]: string};
     let slidersData: SlidesType;
+    let titleIndex = 0;
     const setSliderData = (slides: StrapiObjectType[]) => {
         return slides?.map((slide: StrapiObjectType) => {
            const imageSrc = strapiURL + ((slide["Image"] as StrapiObjectType)?.data as StrapiObjectType[])[0]?.attributes?.url;
@@ -35,17 +37,47 @@
         }
         slidersData = setSliderData(data?.page?.data[0]?.attributes["Content"][0]["Slide"]) as SlidesType;
 
+        $sharedHeaders.map((header, index) => {
+            if(header[data?.page?.data[0]?.attributes?.slug]){
+                titleIndex = index;
+            }
+        })
+
     }
+
 </script>
 
-<main>
-    <h1>{data?.page?.data[0]?.attributes?.title}</h1>
-    {#if slidersData}
-        <Slider slides={slidersData} />
+<main class="main">
+    {#if data?.page?.data[0]}
+        <h1 class="main-title main__title">
+            <span class="main-title__index">{"0"+ titleIndex}</span>
+            {data?.page?.data[0]?.attributes?.title}
+        </h1>
+        {#if slidersData}
+            <Slider slides={slidersData} />
+        {/if}
     {/if}
 </main>
 
 <style>
+    .main {
+        display: flex;
+        flex-direction: column;
+        padding: 0 24px 80px 24px;
+        align-items: center;
+
+    }
+    .main-title {
+        font-family: "Barlow Condensed", serif;
+        font-size: 16px;
+        letter-spacing: 2.7px;
+        text-transform: uppercase;
+        margin-bottom: 32px;
+    }
+    .main-title__index {
+        margin-right: 16px;
+        opacity: 25%;
+    }
 
     @media (min-width: 768px) {
 
