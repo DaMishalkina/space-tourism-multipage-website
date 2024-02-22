@@ -1,0 +1,71 @@
+<script lang="ts">
+    export let tagline = "", title = "", text = "", image: {src: string, alt: string} | undefined = undefined;
+
+</script>
+
+<li class="slide">
+    {#if tagline || title || text}
+        <div class="slide__text-container">
+            {#if title || tagline}
+                <div class="slide__titles">
+                    {#if tagline}
+                        <span class="slide__tagline">{tagline}</span>
+                    {/if}
+                    {#if title}
+                        <h3 class="slide__title">{title}</h3>
+                    {/if}
+                </div>
+            {/if}
+            {#if text}
+                <p class="slide__text">{text}</p>
+            {/if}
+        </div>
+    {/if}
+    {#if image}
+        <div class="slide__image-container">
+            <img
+                    class="slide__image"
+                    src={image.src}
+                    alt={image.alt}
+            />
+        </div>
+    {/if}
+</li>
+
+<style>
+    .slide {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 32px;
+        align-items: center;
+    }
+    .slide__text-container {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        max-width: 458px;
+        gap: 16px;
+    }
+    .slide__tagline {
+        font-family: "Bellefair",serif;
+        text-transform: uppercase;
+        color: var(--title-color);
+        opacity: 50%;
+    }
+    .slide__titles {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .slide__image-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        border-bottom: 1px solid #383B4B;
+    }
+    .slide__image {
+        height: 222px;
+        width: auto;
+    }
+</style>

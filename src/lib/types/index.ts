@@ -8,3 +8,15 @@ export type StrapiObjectType = StrapiObjectInterface & {
     attributes: StrapiObjectAttributesType
 
 }
+
+export type SlideType = {
+    tagline: string | undefined,
+    title: string | undefined,
+    text: string | undefined,
+    image: {
+        src: string,
+        alt: string
+    } | undefined
+}
+
+export type SlidesType = SlideType[];
