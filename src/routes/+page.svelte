@@ -75,13 +75,14 @@
     @media (min-width: 1440px) {
         .main {
             flex-direction: row;
-            padding: 24px 24px 165px 24px;
+            padding: 24px 165px 165px 165px;
             align-items: center;
             justify-content: space-between;
-            width: 100%;
-            max-width: 1200px;
             margin: auto auto;
-           flex: unset;
+            max-width: 100%;
+            width: 100%;
+            flex: unset;
+            box-sizing: border-box;
 
         }
         .main > :global(button){
