@@ -87,9 +87,11 @@
         }
         .slide__image-container {
             border-bottom: none;
+            flex: 1;
+            align-items: end;
         }
         .slide__image {
-            height: 532px;
+            height: 572px;
         }
     }
     @media (min-width: 1440px) {

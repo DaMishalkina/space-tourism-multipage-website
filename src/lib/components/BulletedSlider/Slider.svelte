@@ -10,15 +10,15 @@
 
 
 <div class="slider">
-    <ul  class="slider__radio-buttons">
+    <ul  class="slider__checkboxes">
         {#each slides as slide, i(i)}
-            <li class="slider-button slider__radio-button">
+            <li class="slider-checkbox slider__checkbox">
                 <label
-                        class="slider-button__input-wrapper"
+                        class="slider-checkbox__input-wrapper"
                         class:active={sliderTransformationIndex === i}
                 >
                     <input
-                            class="slider-button__hidden-input"
+                            class="slider-checkbox__hidden-input"
                             value={i}
                             type="checkbox"
                             id={slide.title}
@@ -62,22 +62,23 @@
     .slider__slides {
         display: flex;
         transition: transform 0.5s ease-in-out;
+        height: 100%;
         /*position: absolute;*/
         /*top: 0;*/
         /*left: 0;*/
         /*right: 0;*/
         /*bottom: 0;*/
     }
-    .slider__radio-buttons {
+    .slider__checkboxes{
         position: absolute;
         top:50%;
         left: 50%;
         z-index: 1;
-        transform: translate(-50%, calc(50% + 16px));
+        transform: translate(-50%, 75%);
         display: flex;
         gap: 16px;
     }
-    .slider-button__input-wrapper {
+    .slider-checkbox__input-wrapper {
         display: flex;
         width: 10px;
         height: 10px;
@@ -87,7 +88,7 @@
         opacity: 17.44%;
         cursor: pointer;
     }
-    .slider-button__hidden-input {
+    .slider-checkbox__hidden-input {
         width: 0;
         height: 0;
         position: absolute;
@@ -95,12 +96,19 @@
         right: 0;
         display: none;
     }
-    .slider-button__input-wrapper:hover {
+    .slider-checkbox__input-wrapper:hover {
         opacity: 50%;
 
     }
-    .slider-button__input-wrapper:active, .slider-button__input-wrapper.active {
+    .slider-checkbox__input-wrapper:active, .slider-checkbox__input-wrapper.active {
         opacity: 100%;
+    }
+    @media (min-width: 768px) {
+        .slider__checkboxes {
+            top: 25%;
+            transform: translate(-50%, 50%);
+        }
+
     }
 </style>
 

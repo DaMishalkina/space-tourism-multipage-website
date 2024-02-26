@@ -69,13 +69,13 @@
         align-items: center;
         gap: 32px;
         flex: 1;
+        padding: 0 24px 24px 24px;
     }
     .main {
         position: relative;
         flex: 1;
         display: flex;
         flex-direction: column;
-        padding: 0 24px 80px 24px;
         box-sizing: border-box;
     }
     .main-title {
@@ -83,7 +83,6 @@
         font-size: 16px;
         letter-spacing: 2.7px;
         text-transform: uppercase;
-        margin-bottom: 32px;
     }
     .main-title__index {
         margin-right: 16px;
