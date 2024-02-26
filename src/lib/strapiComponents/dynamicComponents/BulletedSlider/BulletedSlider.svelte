@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type {SlidesType} from "../../types";
+    import type {SlidesType} from "../../../types";
     import Slide from "./Slide.svelte";
 
     export let slides: SlidesType
@@ -109,6 +109,16 @@
             transform: translate(-50%, 50%);
         }
 
+    }
+    @media (min-width: 1440px) {
+       .slider__checkboxes {
+           left: 0;
+           top: auto;
+           bottom: 0;
+           transform: translate(0, -94px);
+       }
+    }
+    @media (min-width: 1440px) {
     }
 </style>
 

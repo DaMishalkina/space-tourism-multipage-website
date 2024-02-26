@@ -1,7 +1,7 @@
 <script lang="ts">
     import { browser } from '$app/environment';
     import {setStrapiBackgroundImages} from "$lib/utils/setStrapiBackgroundImages";
-    import Slider from "$lib/components/BulletedSlider/Slider.svelte";
+    import BulletedSlider from "$lib/strapiComponents/dynamicComponents/BulletedSlider/BulletedSlider.svelte";
     import type {StrapiObjectType} from "../../lib/types";
     import type {SlidesType} from "../../lib/types";
     import {sharedHeaders} from "$lib/stores/headers";
@@ -35,7 +35,7 @@
             document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.bgImageTablet}')`);
             document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.bgImageDesktop}')`);
         }
-        slidersData = setSliderData(data?.page?.data[0]?.attributes["Content"][0]["Slide"]) as SlidesType;
+        // slidersData = setSliderData(data?.page?.data[0]?.attributes["Content"][0]["Slide"]) as SlidesType;
 
         $sharedHeaders.map((header, index) => {
             if(header[data?.page?.data[0]?.attributes?.slug]){
@@ -54,9 +54,9 @@
                 <span class="main-title__index">{"0"+ titleIndex}</span>
                 {data?.page?.data[0]?.attributes?.title}
             </h1>
-            {#if slidersData}
-                <Slider slides={slidersData} />
-            {/if}
+            <!--{#if slidersData}-->
+            <!--    <Slider slides={slidersData} />-->
+            <!--{/if}-->
         </section>
     {/if}
 </main>

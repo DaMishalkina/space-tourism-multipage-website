@@ -109,6 +109,9 @@
         .slide__title {
             white-space: nowrap;
         }
+        .slide__image-container {
+            height: 100%;
+        }
         .slide__image {
             height: 654px;
         }
