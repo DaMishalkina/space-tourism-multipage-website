@@ -39,10 +39,10 @@
         flex-direction: column-reverse;
         gap: 74px;
         align-items: center;
-        width: 100vw;
+        width: 100%;
         height: 100%;
-        padding: 0 24px;
         box-sizing: border-box;
+        justify-content: start;
     }
     .slide__text-container {
         display: flex;
@@ -80,6 +80,7 @@
         .slide {
             flex-direction: column;
             gap: 90px;
+            padding: 0;
         }
         .slide__tagline {
             font-size: 24px;

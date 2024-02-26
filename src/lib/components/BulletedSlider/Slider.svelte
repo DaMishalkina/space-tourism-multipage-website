@@ -5,6 +5,7 @@
     export let slides: SlidesType
     let sliderTransformationIndex = 0;
 
+
 </script>
 
 
@@ -19,7 +20,7 @@
                     <input
                             class="slider-button__hidden-input"
                             value={i}
-                            type="radio"
+                            type="checkbox"
                             id={slide.title}
                             on:change={() => sliderTransformationIndex = i}
                     />
@@ -47,16 +48,25 @@
 <style>
     .slider {
         position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
     }
     .slider__container {
         position: relative;
-        overflow-x: hidden;
-        width: 100vw;
+        width: 100%;
+        height: 100%;
     }
     .slider__slides {
-        height: 100%;
         display: flex;
         transition: transform 0.5s ease-in-out;
+        /*position: absolute;*/
+        /*top: 0;*/
+        /*left: 0;*/
+        /*right: 0;*/
+        /*bottom: 0;*/
     }
     .slider__radio-buttons {
         position: absolute;

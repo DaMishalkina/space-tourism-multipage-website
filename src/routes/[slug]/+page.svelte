@@ -49,23 +49,34 @@
 
 <main class="main">
     {#if data?.page?.data[0]}
-        <h1 class="main-title main__title">
-            <span class="main-title__index">{"0"+ titleIndex}</span>
-            {data?.page?.data[0]?.attributes?.title}
-        </h1>
-        {#if slidersData}
-            <Slider slides={slidersData} />
-        {/if}
+        <section class="main__content">
+            <h1 class="main-title main__title">
+                <span class="main-title__index">{"0"+ titleIndex}</span>
+                {data?.page?.data[0]?.attributes?.title}
+            </h1>
+            {#if slidersData}
+                <Slider slides={slidersData} />
+            {/if}
+        </section>
     {/if}
 </main>
 
 <style>
+    .main__content {
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        align-items: center;
+        gap: 32px;
+        flex: 1;
+    }
     .main {
+        position: relative;
+        flex: 1;
         display: flex;
         flex-direction: column;
         padding: 0 24px 80px 24px;
-        align-items: center;
-
+        box-sizing: border-box;
     }
     .main-title {
         font-family: "Barlow Condensed", serif;
@@ -80,6 +91,11 @@
     }
 
     @media (min-width: 768px) {
+        .main__content {
+            gap: 60px;
+            align-items: start;
+            padding: 40px 24px 0 38px;
+        }
 
     }
     @media (min-width: 1440px) {
