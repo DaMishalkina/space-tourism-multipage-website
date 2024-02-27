@@ -1,5 +1,8 @@
 <script lang="ts">
-    export let tagline = "", title = "", text = "", image: {src: string, alt: string} | undefined = undefined;
+    import type {ImageType} from "../../../types";
+    import Image from "$lib/components/Image.svelte";
+    export let tagline = "", title = "", text = "", image: ImageType | undefined = undefined;
+
 
 </script>
 
@@ -23,10 +26,14 @@
     {/if}
     {#if image}
         <div class="slide__image-container">
-            <img
-                    class="slide__image"
-                    src={image.src}
-                    alt={image.alt}
+<!--            <img-->
+<!--                    class="slide__image"-->
+<!--                    src={image.src}-->
+<!--                    alt={image.alt}-->
+<!--            />-->
+            <Image
+                    className="slide__image"
+                    image={image}
             />
         </div>
     {/if}
@@ -72,7 +79,7 @@
         border-bottom: 1px solid #383B4B;
         box-sizing: border-box;
     }
-    .slide__image {
+    :global(.slide__image) {
         height: 222px;
         width: auto;
     }
@@ -90,7 +97,7 @@
             flex: 1;
             align-items: end;
         }
-        .slide__image {
+        :global(.slide__image) {
             height: 572px;
         }
     }
@@ -112,7 +119,7 @@
         .slide__image-container {
             height: 100%;
         }
-        .slide__image {
+        :global(.slide__image) {
             height: 654px;
         }
 

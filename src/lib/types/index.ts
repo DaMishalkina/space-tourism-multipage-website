@@ -20,3 +20,8 @@ export type SlideType = {
 }
 
 export type SlidesType = SlideType[];
+
+export type ImageType = {
+    alt: string,
+    srcSet: {urlMobile: string, urlTablet: string, urlDesktop: string}
+}

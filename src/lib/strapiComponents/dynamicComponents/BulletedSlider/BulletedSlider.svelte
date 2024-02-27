@@ -6,14 +6,12 @@
 
     export let data: StrapiObjectType[];
     let slides: SlidesType;
-    console.log(data)
     const strapiURL = import.meta.env.VITE_STRAPI_URL;
     const setSliderData = (slides: StrapiObjectType[]) => {
         return slides?.map((slide: StrapiObjectType) => {
-            const imageSrc = strapiURL + ((slide["Image"] as StrapiObjectType)?.data as StrapiObjectType[])[0]?.attributes?.url;
             const imageAlt = ((slide["Image"] as StrapiObjectType)?.data as StrapiObjectType[])[0]?.attributes?.alternativeText;
             const image = {
-                src: imageSrc,
+                srcSet: strapiImagesURLsMapper(strapiURL, (slide["Image"] as StrapiObjectType)?.data as StrapiObjectType[]),
                 alt: imageAlt
             }
             return {
