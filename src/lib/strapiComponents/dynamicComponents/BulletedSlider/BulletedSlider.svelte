@@ -2,28 +2,13 @@
     import type {SlidesType} from "../../../types";
     import Slide from "./Slide.svelte";
     import type {StrapiObjectType} from "../../../types/";
-    import {strapiImagesURLsMapper} from "$lib/utils/strapiImagesURLsMapper";
+    import {setStrapiSlideData} from "$lib/utils/setStrapiSlideData";
 
     export let data: StrapiObjectType[];
     let slides: SlidesType;
     const strapiURL = import.meta.env.VITE_STRAPI_URL;
-    const setSliderData = (slides: StrapiObjectType[]) => {
-        return slides?.map((slide: StrapiObjectType) => {
-            const imageAlt = ((slide["Image"] as StrapiObjectType)?.data as StrapiObjectType[])[0]?.attributes?.alternativeText;
-            const image = {
-                srcSet: strapiImagesURLsMapper(strapiURL, (slide["Image"] as StrapiObjectType)?.data as StrapiObjectType[]),
-                alt: imageAlt
-            }
-            return {
-                text: slide.Text,
-                title: slide.Title,
-                tagline: slide.Tagline,
-                image: image
-            }
-        })
-    }
     $: {
-        slides = setSliderData(data) as SlidesType;
+        slides = setStrapiSlideData(strapiURL, data) as SlidesType;
     }
     let sliderTransformationIndex = 0;
 

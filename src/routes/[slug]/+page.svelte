@@ -1,35 +1,14 @@
 <script lang="ts">
     import {setStrapiBackgroundImages} from "$lib/utils/setStrapiBackgroundImages";
-    import type {StrapiObjectType} from "../../lib/types";
-    import type {SlidesType} from "../../lib/types";
     import {sharedHeaders} from "$lib/stores/headers";
     import DynamicComponentWrapper from "$lib/strapiComponents/dynamicComponents/DynamicComponentWrapper.svelte";
 
     export let data;
     console.log(data)
     const strapiURL = import.meta.env.VITE_STRAPI_URL;
-    let bgImagesUrls: {[key: string]: string};
-    let slidersData: SlidesType;
     let titleIndex = 0;
-    const setSliderData = (slides: StrapiObjectType[]) => {
-        return slides?.map((slide: StrapiObjectType) => {
-           const imageSrc = strapiURL + ((slide["Image"] as StrapiObjectType)?.data as StrapiObjectType[])[0]?.attributes?.url;
-           const imageAlt = ((slide["Image"] as StrapiObjectType)?.data as StrapiObjectType[])[0]?.attributes?.alternativeText;
-           const image = {
-               src: imageSrc,
-               alt: imageAlt
-           }
-           return {
-               text: slide.Text,
-               title: slide.Title,
-               tagline: slide.Tagline,
-               image: image
-           }
-        })
-    }
     $: {
         setStrapiBackgroundImages(strapiURL, data?.page?.data[0]);
-        // slidersData = setSliderData(data?.page?.data[0]?.attributes["Content"][0]["Slide"]) as SlidesType;
 
         $sharedHeaders.map((header, index) => {
             if(header[data?.page?.data[0]?.attributes?.slug]){
@@ -44,18 +23,17 @@
 <main class="main">
     {#if data?.page?.data[0]}
         <section class="main__content">
-            <h1 class="main-title main__title">
-                <span class="main-title__index">{"0"+ titleIndex}</span>
-                {data?.page?.data[0]?.attributes?.title}
-            </h1>
+            {#if data?.page?.data[0]?.attributes?.title}
+                <h1 class="main-title main__title">
+                    <span class="main-title__index">{"0"+ titleIndex}</span>
+                    {data?.page?.data[0]?.attributes?.title}
+                </h1>
+            {/if}
             {#if data?.page?.data[0]?.attributes["Content"]}
                 {#each data?.page?.data[0]?.attributes["Content"] as component, i(i)}
                         <DynamicComponentWrapper dynamicComponentData={component} />
                 {/each}
             {/if}
-            <!--{#if slidersData}-->
-            <!--    <Slider slides={slidersData} />-->
-            <!--{/if}-->
         </section>
     {/if}
 </main>

@@ -26,11 +26,6 @@
     {/if}
     {#if image}
         <div class="slide__image-container">
-<!--            <img-->
-<!--                    class="slide__image"-->
-<!--                    src={image.src}-->
-<!--                    alt={image.alt}-->
-<!--            />-->
             <Image
                     className="slide__image"
                     image={image}

@@ -7,14 +7,8 @@
     export let data;
     const strapiURL = import.meta.env.VITE_STRAPI_URL;
     let content = data?.page?.data?.attributes?.text;
-    // let bgImagesUrls: {[key: string]: string};
     $: {
         setStrapiBackgroundImages(strapiURL, data?.page?.data);
-        // if(browser){
-        //     document.body.style.setProperty("--bg-image", `url('${bgImagesUrls.imageMobile}')`);
-        //     document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.imageTablet}')`);
-        //     document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.imageDesktop}')`);
-        // }
 
     }
     onMount(async () => {

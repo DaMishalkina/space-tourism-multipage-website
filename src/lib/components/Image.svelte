@@ -15,7 +15,7 @@
             media="(min-width: 768px)"
     />
     <img
-            src={image.srcSet.urlMobile || image.srcSet.urlDesktop}
+            src={image.srcSet.urlMobile || image.srcSet.urlTablet || image.srcSet.urlDesktop}
             alt={image.alt}
             class={className}
     />
