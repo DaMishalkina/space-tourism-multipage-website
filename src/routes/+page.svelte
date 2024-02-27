@@ -3,19 +3,18 @@
     import {onMount} from "svelte";
     import ExploreButton from "$lib/components/ExploreButton.svelte";
     import {setStrapiBackgroundImages} from "$lib/utils/setStrapiBackgroundImages";
-    import {browser} from "$app/environment";
 
     export let data;
     const strapiURL = import.meta.env.VITE_STRAPI_URL;
     let content = data?.page?.data?.attributes?.text;
-    let bgImagesUrls: {[key: string]: string};
+    // let bgImagesUrls: {[key: string]: string};
     $: {
-        bgImagesUrls = setStrapiBackgroundImages(strapiURL, data?.page?.data);
-        if(browser){
-            document.body.style.setProperty("--bg-image", `url('${bgImagesUrls.bgImageMobile}')`);
-            document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.bgImageTablet}')`);
-            document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.bgImageDesktop}')`);
-        }
+        setStrapiBackgroundImages(strapiURL, data?.page?.data);
+        // if(browser){
+        //     document.body.style.setProperty("--bg-image", `url('${bgImagesUrls.imageMobile}')`);
+        //     document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.imageTablet}')`);
+        //     document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.imageDesktop}')`);
+        // }
 
     }
     onMount(async () => {

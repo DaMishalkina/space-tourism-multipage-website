@@ -1,24 +1,13 @@
 import type {StrapiObjectType} from "../types";
+import {strapiImagesURLsMapper} from "$lib/utils/strapiImagesURLsMapper";
+import {browser} from "$app/environment";
 
 export const setStrapiBackgroundImages = (sourceUrl: string, data: {[key: string]: StrapiObjectType}) => {
-    const bgImagesUrls = {
-        bgImageMobile: "",
-        bgImageTablet: "",
-        bgImageDesktop: ""
-    };
-    ((data?.attributes?.bgImage as StrapiObjectType)?.data as StrapiObjectType[])?.map((image: StrapiObjectType) => {
-        switch (image?.attributes?.width){
-            case 375:
-                bgImagesUrls.bgImageMobile = `${sourceUrl}${image?.attributes?.url}`;
-                break;
-            case 768:
-                bgImagesUrls.bgImageTablet =`${sourceUrl}${image?.attributes?.url}`;
-                break;
-            default:
-                bgImagesUrls.bgImageDesktop = `${sourceUrl}${image?.attributes?.url}`;
-                break;
-        }
-    })
-    return bgImagesUrls;
+    const {urlMobile, urlTablet, urlDesktop} =strapiImagesURLsMapper(sourceUrl, (data?.attributes?.bgImage as StrapiObjectType)?.data as StrapiObjectType[])
+    if(browser){
+        document.body.style.setProperty("--bg-image", `url('${urlMobile}')`);
+        document.body.style.setProperty("--bg-image--md", `url('${urlTablet}')`);
+        document.body.style.setProperty("--bg-image--lg", `url('${urlDesktop}')`);
+    }
 
 }

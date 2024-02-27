@@ -5,7 +5,7 @@ export interface StrapiObjectInterface {
     [key: string]: string | null | number | StrapiObjectType | StrapiObjectType[]
 }
 export type StrapiObjectType = StrapiObjectInterface & {
-    attributes: StrapiObjectAttributesType
+    attributes?: StrapiObjectAttributesType
 
 }
 

@@ -1,5 +1,6 @@
 import type {PageLoad} from "../../../.svelte-kit/types/src/routes/[slug]/$types";
 
+
 export const load: PageLoad = async ({fetch, params}) => {
         try {
             const currentPathname = params.slug;

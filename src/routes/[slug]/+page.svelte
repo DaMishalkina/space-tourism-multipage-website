@@ -1,10 +1,9 @@
 <script lang="ts">
-    import { browser } from '$app/environment';
     import {setStrapiBackgroundImages} from "$lib/utils/setStrapiBackgroundImages";
-    import BulletedSlider from "$lib/strapiComponents/dynamicComponents/BulletedSlider/BulletedSlider.svelte";
     import type {StrapiObjectType} from "../../lib/types";
     import type {SlidesType} from "../../lib/types";
     import {sharedHeaders} from "$lib/stores/headers";
+    import DynamicComponentWrapper from "$lib/strapiComponents/dynamicComponents/DynamicComponentWrapper.svelte";
 
     export let data;
     console.log(data)
@@ -29,12 +28,7 @@
         })
     }
     $: {
-        bgImagesUrls = setStrapiBackgroundImages(strapiURL, data?.page?.data[0]);
-        if(browser){
-            document.body.style.setProperty("--bg-image", `url('${bgImagesUrls.bgImageMobile}')`);
-            document.body.style.setProperty("--bg-image--md", `url('${bgImagesUrls.bgImageTablet}')`);
-            document.body.style.setProperty("--bg-image--lg", `url('${bgImagesUrls.bgImageDesktop}')`);
-        }
+        setStrapiBackgroundImages(strapiURL, data?.page?.data[0]);
         // slidersData = setSliderData(data?.page?.data[0]?.attributes["Content"][0]["Slide"]) as SlidesType;
 
         $sharedHeaders.map((header, index) => {
@@ -54,6 +48,11 @@
                 <span class="main-title__index">{"0"+ titleIndex}</span>
                 {data?.page?.data[0]?.attributes?.title}
             </h1>
+            {#if data?.page?.data[0]?.attributes["Content"]}
+                {#each data?.page?.data[0]?.attributes["Content"] as component, i(i)}
+                        <DynamicComponentWrapper dynamicComponentData={component} />
+                {/each}
+            {/if}
             <!--{#if slidersData}-->
             <!--    <Slider slides={slidersData} />-->
             <!--{/if}-->
