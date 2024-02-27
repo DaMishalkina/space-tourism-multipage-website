@@ -13,10 +13,7 @@ export type SlideType = {
     tagline: string | undefined,
     title: string | undefined,
     text: string | undefined,
-    image: {
-        src: string,
-        alt: string
-    } | undefined
+    image: ImageType | undefined
 }
 
 export type SlidesType = SlideType[];
